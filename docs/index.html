@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tadka – Cook it right. Waste nothing.</title>
+<meta name="description" content="Tadka sizes every recipe to your family to the gram, in your region's style, with what's already in your kitchen. Step-by-step cook mode, tiffin planner, 12 Indian languages. Free Android app, no account.">
+<meta property="og:title" content="Tadka – Cook it right. Waste nothing.">
+<meta property="og:description" content="Recipes sized for your family to the gram, step by step, like someone is cooking beside you.">
+<meta property="og:image" content="https://jhanilive.github.io/tadka-app/icon.png">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF6EF; --surface: #FFFFFF; --alt: #F2ECE1; --ink: #1D1A15; --muted: #6B6358; --line: #ECE4D6;
+    --leaf: #0F3D2E; --leaf2: #1C5C43; --leaf-soft: #E3F0E8; --flame: #F2541B; --flame-soft: #FFE6DA; --haldi: #F5B700; --haldi-soft: #FFF3CC;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #0E0D0B; --surface: #1A1815; --alt: #24211C; --ink: #F6F0E6; --muted: #B5AC9E; --line: #2C2823; --leaf-soft: #14281F; --flame-soft: #3A1C10; --haldi-soft: #3A2E0C; }
+  }
+  :root[data-theme="dark"] { --bg: #0E0D0B; --surface: #1A1815; --alt: #24211C; --ink: #F6F0E6; --muted: #B5AC9E; --line: #2C2823; --leaf-soft: #14281F; --flame-soft: #3A1C10; --haldi-soft: #3A2E0C; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 "Plus Jakarta Sans", system-ui, sans-serif; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; letter-spacing: -0.02em; margin: 0; }
+  em.f { font-family: Fraunces, serif; font-style: italic; color: var(--haldi); }
+  a { color: var(--flame); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+  .hero { background: radial-gradient(120% 80% at 80% 100%, #1C5C43 0%, var(--leaf) 55%, #0A2A20 100%); color: #FFF7EA; padding: 28px 0 0; overflow: hidden; }
+  .nav { display: flex; align-items: center; gap: 12px; font: 700 20px Fraunces, serif; }
+  .nav img { width: 40px; height: 40px; border-radius: 12px; }
+  .hero .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: end; }
+  .hero h1 { font-size: clamp(42px, 7vw, 74px); line-height: 1.02; margin: 44px 0 14px; }
+  .lead { font-size: clamp(17px, 2.2vw, 21px); color: #D8E6DD; max-width: 520px; margin: 0 0 28px; }
+  .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--flame); color: #fff; text-decoration: none; font-weight: 800; font-size: 18px; padding: 16px 28px; border-radius: 999px; box-shadow: 0 12px 30px rgba(242, 84, 27, 0.35); }
+  .cta:hover { transform: translateY(-1px); }
+  .cta:focus-visible { outline: 3px solid var(--haldi); outline-offset: 3px; }
+  .meta { font-size: 14px; color: #BFD8CA; margin: 14px 0 0; }
+  .phone { justify-self: center; width: 270px; border-radius: 36px; overflow: hidden; border: 8px solid #06140F; box-shadow: 0 30px 60px rgba(0,0,0,0.4); margin-bottom: -70px; background: #06140F; }
+  .phone img { display: block; width: 100%; }
+  .kadhai { display: block; width: 120px; margin-top: 20px; }
+
+  section { padding: 110px 0 0; }
+  section h2 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.1; margin-bottom: 12px; }
+  .sub { color: var(--muted); font-size: 18px; max-width: 660px; margin: 0 0 32px; }
+  .story { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 30px; font-size: 18px; }
+  .story p { margin: 0 0 12px; }
+  .feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .f { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 24px; }
+  .f .e { font-size: 34px; }
+  .f h3 { font-size: 21px; margin: 8px 0 6px; }
+  .f p { margin: 0; color: var(--muted); font-size: 15px; }
+  .f.leaf { background: var(--leaf-soft); border-color: transparent; }
+  .f.flame { background: var(--flame-soft); border-color: transparent; }
+  .f.haldi { background: var(--haldi-soft); border-color: transparent; }
+  .shots { display: flex; gap: 16px; overflow-x: auto; padding: 4px 4px 18px; scroll-snap-type: x mandatory; }
+  .shots figure { margin: 0; flex: 0 0 230px; scroll-snap-align: start; }
+  .shots img { width: 100%; border-radius: 26px; border: 6px solid var(--ink); display: block; }
+  .shots figcaption { text-align: center; color: var(--muted); font-size: 14px; margin-top: 8px; }
+  .langs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .langs span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 700; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: s; }
+  .steps li { list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 22px; }
+  .steps li::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--leaf); color: #FFF7EA; font-weight: 800; margin-bottom: 10px; }
+  .honest { background: var(--alt); border-radius: 24px; padding: 24px; color: var(--muted); }
+  .final { text-align: center; padding: 110px 0 40px; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; text-align: center; }
+
+  @media (max-width: 820px) {
+    .hero .grid { grid-template-columns: 1fr; }
+    .phone { margin: 10px auto -60px; width: 240px; }
+    .feats, .steps { grid-template-columns: 1fr; }
+    section { padding-top: 80px; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="nav"><img src="icon.png" alt="">Tadka</div>
+    <div class="grid">
+      <div>
+        <h1>Cook it right.<br><em class="f">Waste nothing.</em></h1>
+        <p class="lead">Recipes sized for your family to the gram, in your region’s style, with what’s already in your kitchen. Step by step, like someone is cooking beside you.</p>
+        <a class="cta" href="https://github.com/JhaniLive/tadka-app/releases/latest/download/Tadka.apk">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download for Android
+        </a>
+        <p class="meta">Free · No account · No ads · Android 8+</p>
+      </div>
+      <div class="phone"><img src="img/home.png" alt="Tadka home screen: What's for lunch?"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Why Tadka exists</h2>
+    <div class="story">
+      <p>Most of us love good food, but nobody taught us to cook. We watch the same video again and again, and still the dal comes out different, because <b>their family isn’t our family</b>: their “2 cups” and “a little salt” are not ours.</p>
+      <p>Tadka knows who eats at your table: their ages, the spice each one likes, allergies, health and BMI. It works out exactly how much to cook, in grams, for your kitchen, so food tastes right and nothing goes to waste.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Everything a home cook needs</h2>
+    <p class="sub">Built for Indian kitchens: pressure-cooker whistles, tadka, tiffins and leftovers.</p>
+    <div class="feats">
+      <div class="f flame"><div class="e">⚖️</div><h3>Sized to the gram</h3><p>Every recipe is scaled to your family’s real portions (kids, adults, elders), in grams, ounces, or cups and spoons.</p></div>
+      <div class="f leaf"><div class="e">🌶️</div><h3>One pot, everyone happy</h3><p>Tadka finds the spice level for the whole table, then shows a small extra tadka for those who like it hot. Kids’ plates come out first.</p></div>
+      <div class="f haldi"><div class="e">🗺️</div><h3>Your region, or the best of India</h3><p>Home style from your state, or the version a place is famous for: Hyderabadi bagara baingan, Andhra gutti vankaya, Bengali begun bhaja…</p></div>
+      <div class="f"><div class="e">👩‍🍳</div><h3>Cook mode</h3><p>Big steps, the flame level, timers, a whistle counter, the amounts each step needs, read aloud. Hands-free: just say “next”.</p></div>
+      <div class="f"><div class="e">🧺</div><h3>Snap your kitchen</h3><p>Photograph the vegetable basket or fridge. Tadka lists everything with how long it keeps, and plans meals that use it first.</p></div>
+      <div class="f"><div class="e">📸</div><h3>What is this?</h3><p>Snap any vegetable: its name in Indian languages, nutrition, how to pick, store and cut it, and the famous ways to cook it.</p></div>
+      <div class="f leaf"><div class="e">🍱</div><h3>Tiffin planner</h3><p>Lunch boxes for office and school that stay good till lunch, with a timed morning plan so you leave on time.</p></div>
+      <div class="f"><div class="e">📅</div><h3>Week plan & shopping list</h3><p>Seven days of meals around what you have, and a list of only what’s missing. Tick it off and it moves into your kitchen.</p></div>
+      <div class="f flame"><div class="e">♻️</div><h3>Leftover rescue</h3><p>Leftover rice, rotis or dal become something new tomorrow. Cooked too much? Store it right or share it.</p></div>
+      <div class="f"><div class="e">💚</div><h3>Health-aware</h3><p>Allergy alerts checked in the app, nutrition per person, and gentle care for diabetes, BP, PCOS, pregnancy and more.</p></div>
+      <div class="f"><div class="e">🌙</div><h3>Fasting days, if you want</h3><p>Choose a vrat, Ramzan sehri or iftar, Jain or your own rule, and every idea follows it. Never assumed.</p></div>
+      <div class="f haldi"><div class="e">🧠</div><h3>Learns your taste</h3><p>Too salty? Too much? Tell Tadka after cooking, and the next recipes adjust salt, spice and portions.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>See it</h2>
+    <div class="shots">
+      <figure><img src="img/home.png" alt="Home screen" loading="lazy"><figcaption>What’s for lunch?</figcaption></figure>
+      <figure><img src="img/recipe.png" alt="Recipe sized for the family" loading="lazy"><figcaption>Sized for your table</figcaption></figure>
+      <figure><img src="img/cookmode.png" alt="Cook mode step" loading="lazy"><figcaption>Cook mode</figcaption></figure>
+      <figure><img src="img/kitchen.png" alt="Kitchen list with freshness" loading="lazy"><figcaption>Use these first</figcaption></figure>
+      <figure><img src="img/cook.png" alt="Planning a meal" loading="lazy"><figcaption>Plan a meal</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>In your language</h2>
+    <p class="sub">Recipes, steps, tips, the chef chat and read-aloud come in your language.</p>
+    <div class="langs"><span>English</span><span>हिन्दी</span><span>اردو</span><span>తెలుగు</span><span>বাংলা</span><span>தமிழ்</span><span>മലയാളം</span><span>ಕನ್ನಡ</span><span>मराठी</span><span>ગુજરાતી</span><span>ਪੰਜਾਬੀ</span><span>ଓଡ଼ିଆ</span></div>
+  </section>
+
+  <section>
+    <h2>Install in a minute</h2>
+    <ol class="steps">
+      <li><b>Download</b><br>Tap “Download for Android” on your phone. The file is called Tadka.apk.</li>
+      <li><b>Allow it once</b><br>Android asks to allow installs from your browser. Allow it, then tap Install.</li>
+      <li><b>Set up your table</b><br>Add who eats at home and what’s in your kitchen. Then: what’s for dinner?</li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="honest">
+      <h3 style="color:var(--ink);margin-bottom:6px">Honest notes</h3>
+      Recipes are written fresh for your family by AI from traditional home-cooking technique, not copied from any chef. Amounts, allergy checks and nutrition totals are worked out in the app; nutrition is an estimate. Health notes are general guidance, not medical advice. Your family and kitchen stay on your phone; read the <a href="privacy-policy.html">privacy policy</a>.
+    </div>
+  </section>
+
+  <div class="final">
+    <svg class="kadhai" style="margin:0 auto 10px" viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="170" rx="80" ry="30" fill="#F2541B" opacity=".18"/><path d="M20 92 L180 92 C176 128 146 152 100 152 C54 152 24 128 20 92 Z" fill="#1D1A15"/><ellipse cx="100" cy="93" rx="72" ry="12" fill="#F7A21B"/><path d="M104 90 C112 84 126 84 134 88 C126 92 112 94 104 90 Z" fill="#C2241A"/><path d="M68 89 C74 82 86 82 90 86 C84 92 74 93 68 89 Z" fill="#2E7D3A"/><path d="M85 178 C80 168 84 160 85 152 C86 160 90 168 85 178Z M100 178 C95 166 99 156 100 146 C101 156 105 166 100 178Z M115 178 C110 168 114 160 115 152 C116 160 120 168 115 178Z" fill="#F2541B"/></svg>
+    <h2>What’s for dinner?</h2>
+    <p class="sub" style="margin:10px auto 26px">Let’s make it right the first time.</p>
+    <a class="cta" href="https://github.com/JhaniLive/tadka-app/releases/latest/download/Tadka.apk">Download Tadka</a>
+  </div>
+</main>
+
+<footer>
+  Built with ♥ by Jhani · <a href="mailto:reply2jhani@gmail.com">reply2jhani@gmail.com</a> · <a href="privacy-policy.html">Privacy</a>
+</footer>
+</body>
+</html>
